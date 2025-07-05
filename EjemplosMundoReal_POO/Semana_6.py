@@ -17,6 +17,7 @@ class Mascota:
         if nueva_edad > 0:
             self.__edad = nueva_edad
 
+#Metodo comun que sera sobreescrito por clases hijas: polimorfismo
     def hacer_sonido(self):
         return "Sonido genérico de mascota"
 
@@ -27,9 +28,10 @@ class Mascota:
 # Clase derivada: Perro
 class Perro(Mascota):
     def __init__(self, nombre, edad, raza):
-        super().__init__(nombre, edad)
+        super().__init__(nombre, edad)#llamada al constructor de la clase base
         self.raza = raza
 
+    #Metodo sobreescrito: polimorfismo
     def hacer_sonido(self):
         return "Y hace: ¡Guau!"
 
@@ -43,6 +45,7 @@ class Gato(Mascota):
         super().__init__(nombre, edad)
         self.color = color
 
+    #Metodo sobre escrito: polimorfismo
     def hacer_sonido(self):
         return "Y hace: ¡Miau!"
 
@@ -61,8 +64,9 @@ def main():
     print(gato1.describir())
     print(gato1.hacer_sonido())
 
+#Encapsulación: para cambiar el nombre y la edad del gato
     gato1.set_nombre("Mishi")
-    gato1.set_edad(4)
+    gato1.set_edad(2)
     print(gato1.describir())
 
 main()
