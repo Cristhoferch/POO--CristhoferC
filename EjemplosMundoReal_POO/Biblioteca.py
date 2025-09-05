@@ -32,17 +32,17 @@ class Biblioteca:
         if isbn not in self.libros_disponibles:
             libro = Libro(titulo, autor, categoria, isbn)
             self.libros_disponibles[isbn] = libro
-            print("✅ Libro añadido correctamente.")
+            print(" Libro añadido correctamente.")
         else:
-            print("⚠️ Este ISBN ya está registrado.")
+            print("️ Este ISBN ya está registrado.")
 
     def quitar_libro(self):
         isbn = input("ISBN del libro a eliminar: ")
         if isbn in self.libros_disponibles:
             del self.libros_disponibles[isbn]
-            print("✅ Libro eliminado.")
+            print(" Libro eliminado.")
         else:
-            print("⚠️ Libro no encontrado.")
+            print("️ Libro no encontrado.")
 
     def registrar_usuario(self):
         nombre = input("Nombre del usuario: ")
@@ -51,51 +51,51 @@ class Biblioteca:
             usuario = Usuario(nombre, id_usuario)
             self.usuarios_registrados[id_usuario] = usuario
             self.ids_usuarios.add(id_usuario)
-            print("✅ Usuario registrado correctamente.")
+            print(" Usuario registrado correctamente.")
         else:
-            print("⚠️ El ID ya está en uso.")
+            print(" El ID ya está en uso.")
 
     def dar_baja_usuario(self):
         id_usuario = input("ID del usuario a dar de baja: ")
         if id_usuario in self.usuarios_registrados:
             usuario = self.usuarios_registrados[id_usuario]
             if usuario.libros_prestados:
-                print("⚠️ No se puede dar de baja: el usuario tiene libros prestados.")
+                print(" No se puede dar de baja: el usuario tiene libros prestados.")
             else:
                 del self.usuarios_registrados[id_usuario]
                 self.ids_usuarios.remove(id_usuario)
-                print("✅ Usuario dado de baja.")
+                print(" Usuario dado de baja.")
         else:
-            print("⚠️ Usuario no encontrado.")
+            print(" Usuario no encontrado.")
 
     def prestar_libro(self):
         id_usuario = input("ID del usuario: ")
         isbn = input("ISBN del libro: ")
         if id_usuario not in self.usuarios_registrados:
-            print("⚠️ Usuario no registrado.")
+            print(" Usuario no registrado.")
             return
         if isbn not in self.libros_disponibles:
-            print("⚠️ Libro no disponible.")
+            print(" Libro no disponible.")
             return
         libro = self.libros_disponibles.pop(isbn)
         self.usuarios_registrados[id_usuario].libros_prestados.append(libro)
         self.historial_prestamos.append((id_usuario, isbn))
-        print(f"✅ Libro prestado a {self.usuarios_registrados[id_usuario].nombre}.")
+        print(f" Libro prestado a {self.usuarios_registrados[id_usuario].nombre}.")
 
     def devolver_libro(self):
         id_usuario = input("ID del usuario: ")
         isbn = input("ISBN del libro: ")
         if id_usuario not in self.usuarios_registrados:
-            print("⚠️ Usuario no registrado.")
+            print("️ Usuario no registrado.")
             return
         usuario = self.usuarios_registrados[id_usuario]
         for libro in usuario.libros_prestados:
             if libro.isbn == isbn:
                 usuario.libros_prestados.remove(libro)
                 self.libros_disponibles[isbn] = libro
-                print("✅ Libro devuelto.")
+                print(" Libro devuelto.")
                 return
-        print("⚠️ Este usuario no tiene ese libro prestado.")
+        print(" Este usuario no tiene ese libro prestado.")
 
     def buscar_libros(self):
         print("\nBuscar por:\n1. Título\n2. Autor\n3. Categoría")
@@ -109,25 +109,25 @@ class Biblioteca:
                 encontrados.append(libro)
             elif opcion == "3" and valor.lower() == libro.categoria.lower():
                 encontrados.append(libro)
-        print("\n📚 Libros encontrados:")
+        print("\n Libros encontrados:")
         if encontrados:
             for l in encontrados:
                 print(l)
         else:
-            print("⚠️ No se encontraron libros.")
+            print(" No se encontraron libros.")
 
     def listar_prestamos(self):
         id_usuario = input("ID del usuario: ")
         if id_usuario in self.usuarios_registrados:
             usuario = self.usuarios_registrados[id_usuario]
-            print(f"\n📚 Libros prestados a {usuario.nombre}:")
+            print(f"\n Libros prestados a {usuario.nombre}:")
             if usuario.libros_prestados:
                 for libro in usuario.libros_prestados:
                     print(libro)
             else:
                 print("No tiene libros prestados.")
         else:
-            print("⚠️ Usuario no encontrado.")
+            print(" Usuario no encontrado.")
 
 # Menú interactivo
 def menu():
@@ -162,10 +162,10 @@ def menu():
         elif opcion == "8":
             biblio.listar_prestamos()
         elif opcion == "9":
-            print("👋 Saliendo del sistema. ¡Hasta luego!")
+            print(" Saliendo del sistema. ¡Hasta luego!")
             break
         else:
-            print("⚠️ Opción no válida. Intenta de nuevo.")
+            print(" Opción no válida. Intenta de nuevo.")
 
 # Ejecutar el programa
 if __name__ == "__main__":
